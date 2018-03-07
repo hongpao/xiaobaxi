@@ -1,5 +1,4 @@
 <!--index.wxml-->
-
 <swiper indicator-dots="{{indicatorDots}}"
         autoplay="{{autoplay}}"
         interval="{{interval}}"
