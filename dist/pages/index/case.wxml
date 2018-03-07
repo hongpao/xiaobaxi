@@ -1,0 +1,22 @@
+<template name="case">
+    <view class="main-list">
+        <view class="li">
+            <view class="author-part">
+                <image class="headImg" src="https://assets.2dfire.com/frontend/057206c38f926b3ac14085f87de4994f.jpg"/>
+                <view class="name">红袍</view>
+                <view class="point">···</view>
+            </view>
+            <view class="main-info">
+                <view class="title ellipsis">2018年关于成长，北大博士给我的7条小建议，受益匪浅！</view>
+                <view class="info ellipsis">
+                    【年均128万元！上海外籍人士收入居全球第四[衰]】汇丰全球移居人士调查最新公布的数据显示，在沪工作的外籍人士年均收入达20.22万美元（约合128万人民币），仅次于孟买、旧金山和苏黎世，是全球移居人士平均收入的两倍之多。调查还显示，移居上海的外国人从事教育和金融业比例最高。外籍人士享受上海生活不仅出于财务方面考虑，多元的文化生活和美食也极具诱惑力。外籍人士在华收入高，你怎么看？[思考][思考]（中国日报）
+                </view>
+                <image class="with-map" src="https://assets.2dfire.com/frontend/42834a7d44368f8e790fecd3e4a20533.jpg"/>
+            </view>
+            <view class="base-info">
+                <view class="tag">新手来开店</view>
+                <view class="date">2018-2-28</view>
+            </view>
+        </view>
+    </view>
+</template>

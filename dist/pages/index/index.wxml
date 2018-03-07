@@ -1,0 +1,22 @@
+<!--index.wxml-->
+
+<swiper indicator-dots="{{indicatorDots}}"
+        autoplay="{{autoplay}}"
+        interval="{{interval}}"
+        duration="{{duration}}"
+        circular="{{circular}}"
+        class="swiper-box">
+    <swiper-item wx:for="{{list}}" wx:key="{{item.id}}">
+        <image src="{{item.imagePath}}" class="slide-image"/>
+    </swiper-item>
+</swiper>
+
+<scroll-view class="scroll-box" scroll-x>
+    <block wx:for="{{entrance}}" wx:key="{{item.name}}">
+        <view class="part" style="{{'background-color:'+item.backgroundColor}}">{{item.name}}</view>
+    </block>
+</scroll-view>
+
+<!-- 最近案例首页展示 -->
+<import src="case.wxml"/>
+<template is="case" data="{{entrance}}"></template>

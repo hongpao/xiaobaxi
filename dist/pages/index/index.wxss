@@ -1,0 +1,106 @@
+.swiper-box {
+  margin-bottom: 10px;
+  width: 100%;
+}
+.swiper-box .slide-image {
+  height: 150px;
+  width: 100%;
+}
+.scroll-box {
+  white-space: nowrap;
+  padding: 20px 0;
+  background-color: #fff;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.scroll-box .part {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  line-height: 70px;
+  text-align: center;
+  font-size: 14px;
+  color: #fff;
+  display: inline-block;
+  margin: 0 10px;
+}
+.main-list {
+  background-color: #fff;
+  border-top: 1px #e2e2e2 solid;
+  margin-bottom: 10px;
+}
+.main-list .li {
+  padding: 0 10px;
+  border-bottom: 1px #e2e2e2 solid;
+}
+.main-list .li .author-part {
+  height: 20px;
+  line-height: 20px;
+  padding: 10px 0;
+}
+.main-list .li .author-part .headImg {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  float: left;
+}
+.main-list .li .author-part .name {
+  float: left;
+  font-size: 12px;
+  color: #666;
+  margin-left: 5px;
+}
+.main-list .li .author-part .point {
+  float: right;
+  color: #e2e2e2;
+  padding: 0 10px;
+}
+.main-list .li .main-info {
+  position: relative;
+  padding: 0 90px 10px 0;
+}
+.main-list .li .main-info .title {
+  color: #000;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+.main-list .li .main-info .info {
+  color: #d2d2d2;
+  font-size: 12px;
+}
+.main-list .li .main-info .ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.main-list .li .main-info .with-map {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+}
+.main-list .li .base-info {
+  height: 17px;
+  margin-bottom: 10px;
+}
+.main-list .li .base-info .tag {
+  border: 1px #f98585 solid;
+  border-radius: 2px;
+  color: #f98585;
+  font-size: 10px;
+  height: 15px;
+  line-height: 15px;
+  padding: 0 5px;
+  float: left;
+}
+.main-list .li .base-info .date {
+  float: left;
+  font-size: 12px;
+  color: #999;
+  margin-left: 10px;
+  line-height: 17px;
+}
