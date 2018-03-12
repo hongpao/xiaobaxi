@@ -1,0 +1,38 @@
+.whole-main {
+  margin-top: 62px;
+}
+.nav-box {
+  height: 52px;
+  line-height: 52px;
+  -webkit-box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+          box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 999;
+}
+.nav-box .nav-content {
+  width: 1000px;
+  margin: 0 auto;
+}
+.nav-box .nav-content .logo {
+  float: left;
+  height: 42px;
+  margin: 5px 30px 0 0;
+}
+.nav-box .nav-content .nav-tab {
+  float: left;
+  margin-right: 25px;
+  color: #444;
+  font-size: 15px;
+}
+.nav-box .nav-content .nav-info {
+  float: right;
+}
+.main-content {
+  width: 1000px;
+  margin: 0 auto;
+}

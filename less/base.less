@@ -1,0 +1,142 @@
+
+html {
+  font-size: 16px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-touch-callout: none; /*系统默认菜单被禁用*/
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
+  font-size: 15px;
+  color: #1a1a1a;
+  background: #f6f6f6;
+  -webkit-tap-highlight-color: rgba(26, 26, 26, 0);
+}
+
+a,
+a:link,
+a:hover,
+a:visited,
+a:active {
+  text-decoration: none;
+  color: #000;
+}
+
+a {
+  cursor: pointer;
+}
+
+a:hover, a:focus {
+  text-decoration: none;
+  outline: none;
+}
+
+a:focus,
+input[type="button"]:focus {
+  outline: none;
+  border: none;
+}
+
+:focus {
+  outline: 0;
+}
+
+ul, ol, li {
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.f_left {
+  float: left;
+}
+
+.f_right {
+  float: right;
+}
+
+em, strong, i, b {
+  font-style: normal;
+  font-weight: normal;
+  line-height: normal;
+}
+
+.clearfix:before, .clearfix:after {
+  content: "";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.clearfix {
+  clear: both;
+  *zoom: 1;
+}
+
+.hide {
+  display: none !important;
+}
+
+.show {
+  display: block !important;
+}
+
+// 字符串超长省略
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flex {
+  display: -webkit-box; /* Chrome 4+, Safari 3.1, iOS Safari 3.2+ */
+  display: -moz-box; /* Firefox 17- */
+  display: -webkit-flex; /* Chrome 21+, Safari 6.1+, iOS Safari 7+, Opera 15/16 */
+  display: -ms-flexbox; /* IE 10 */
+  display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4+ */
+}
+
+.flex-horizontal {
+  /* 09版 */
+  -webkit-box-orient: horizontal;
+  /* 12版 */
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.flex-horizontal-wrap {
+  /* 09版 */
+  -webkit-box-lines: multiple;
+  /* 12版 */
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+//父元素-水平居中
+.flex-justify-center {
+  /* 09版 */
+  -webkit-box-pack: center;
+  /* 12版 */
+  -webkit-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  /* 其它取值如下：
+      align-items     主轴原点方向对齐
+      flex-end        主轴延伸方向对齐
+      space-between   等间距排列，首尾不留白
+      space-around    等间距排列，首尾留白
+   */
+}
+
+.border-box {
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}

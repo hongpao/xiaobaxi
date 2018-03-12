@@ -1,0 +1,112 @@
+.ad {
+  width: 100%;
+  height: 100px;
+  line-height: 100px;
+  background-color: #fff;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.create-info-form {
+  margin-bottom: 10px;
+  background-color: #fff;
+  -webkit-box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+          box-shadow: 0 1px 3px rgba(26, 26, 26, 0.1);
+  padding: 40px 20px;
+  border-radius: 3px;
+}
+.create-info-form .form-tr {
+  margin-bottom: 30px;
+  display: block;
+}
+.create-info-form .form-tr .title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #666;
+  margin-right: 30px;
+  width: 80px;
+  float: left;
+  text-align-last: justify;
+  -moz-text-align-last: justify;
+  height: 30px;
+  line-height: 30px;
+}
+.create-info-form .form-tr .form-input-big {
+  float: left;
+  height: 28px;
+  border: 1px #d2d2d2 solid;
+  width: 400px;
+  border-radius: 4px;
+  margin-right: 20px;
+  padding: 0 5px;
+  line-height: 28px;
+}
+.create-info-form .form-tr .error {
+  font-size: 12px;
+  color: #ff3300;
+  float: left;
+  height: 30px;
+  line-height: 30px;
+}
+.create-info-form .form-tr .form-tag {
+  float: left;
+  font-size: 12px;
+  height: 24px;
+  line-height: 24px;
+  margin: 3px 10px 0 0;
+  padding: 0 5px;
+  border-radius: 4px;
+  background-color: #00BFFF;
+  color: #fff;
+}
+.create-info-form .form-tr .form-input-small {
+  float: left;
+  width: 80px;
+  border: 1px #d2d2d2 solid;
+  border-radius: 4px;
+  margin: 3px 5px 0 20px;
+  height: 24px;
+  line-height: 24px;
+  padding: 0 5px;
+}
+.create-info-form .form-tr .form-btn {
+  float: left;
+  font-size: 12px;
+  height: 24px;
+  line-height: 24px;
+  margin: 3px 20px 0 0;
+  padding: 0 5px;
+  border-radius: 4px;
+  background-color: #43CD80;
+  color: #fff;
+  border: none;
+}
+.create-info-form .form-tr .faceImg {
+  border: 1px #d2d2d2 solid;
+  width: 100px;
+  height: 100px;
+  float: left;
+  position: relative;
+  margin-right: 20px;
+}
+.create-info-form .form-tr .faceImg:before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 50px;
+  width: 1px;
+  height: 60px;
+  background-color: #d2d2d2;
+}
+.create-info-form .form-tr .faceImg:after {
+  content: '';
+  position: absolute;
+  top: 50px;
+  left: 20px;
+  width: 60px;
+  height: 1px;
+  background-color: #d2d2d2;
+}
+.create-info-form .form-tr .editor-content {
+  float: left;
+  width: 100%;
+}
