@@ -4,4 +4,8 @@
 
 const keyMirror = require("keymirror");
 
-module.exports = keyMirror({});
+module.exports = keyMirror({
+    CREATE_INFO: null,
+    ADD_TAG: null,
+    DELETE_TAG: null,
+});

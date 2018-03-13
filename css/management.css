@@ -57,13 +57,17 @@
   border-radius: 4px;
   background-color: #00BFFF;
   color: #fff;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 .create-info-form .form-tr .form-input-small {
   float: left;
-  width: 80px;
+  width: 60px;
   border: 1px #d2d2d2 solid;
   border-radius: 4px;
-  margin: 3px 5px 0 20px;
+  margin: 3px 5px 0 0;
   height: 24px;
   line-height: 24px;
   padding: 0 5px;
@@ -108,5 +112,29 @@
 }
 .create-info-form .form-tr .editor-content {
   float: left;
-  width: 100%;
+  width: 820px;
+}
+.create-info-form .form-tr .btn-box {
+  float: left;
+}
+.create-info-form .form-tr .btn-box .btn {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  width: 120px;
+  height: 30px;
+  line-height: 30px;
+  display: inline-block;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 16px;
+  color: #fff;
+  margin-right: 20px;
+}
+.create-info-form .form-tr .btn-box .btn-submit {
+  background-color: #43CD80;
+}
+.create-info-form .form-tr .btn-box .btn-reload {
+  background-color: #4169E1;
 }
