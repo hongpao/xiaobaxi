@@ -15,7 +15,8 @@ const savePageData = function (createInfo, options) {
         content: createInfo.content,
         faceImage: createInfo.faceImage,
         title: createInfo.title,
-        tags: JSON.stringify(createInfo.tags)
+        tags: createInfo.tags.toString(),
+        author: "hongpao"
     };
 
     return HTTP.ajax(options);

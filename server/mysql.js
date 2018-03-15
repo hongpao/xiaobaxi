@@ -4,6 +4,7 @@
 
 const mysql = require('mysql');
 
+/************************************ 初始化数据库 *************************************/
 const connection = mysql.createConnection({
     host: '10.1.6.10',      //主机地址
     user: 'twodfire',       //用户名
@@ -12,8 +13,10 @@ const connection = mysql.createConnection({
 });
 
 connection.connect();
+/*************************************************************************************/
 
-/**************************************新增********************************************/
+
+/************************************* 新增 *******************************************/
 // let sqlType = "INSERT INTO ";
 // let tableName = "word";
 // let fields = "(id,title,faceImage,content,createTime,author)";
@@ -30,7 +33,7 @@ connection.connect();
 /*************************************************************************************/
 
 
-/**************************************更新********************************************/
+/************************************** 更新 ******************************************/
 // let sqlType = "UPDATE ";
 // let tableName = "word";
 // let updateValues = "author='YANGYANGdd'";
@@ -47,19 +50,19 @@ connection.connect();
 /*************************************************************************************/
 
 
-/**************************************删除********************************************/
-// connection.query("DELETE FROM word where id=123", function (err, result) {
-//
-//     if (err) {
-//         console.log('[DELETE ERROR] - ', err.message);
-//         return;
-//     }
-//     console.log(result);
-// });
+/************************************** 删除 ******************************************/
+connection.query("DELETE FROM word", function (err, result) {
+
+    if (err) {
+        console.log('[DELETE ERROR] - ', err.message);
+        return;
+    }
+    console.log(result);
+});
 /*************************************************************************************/
 
 
-/**************************************查找********************************************/
+/************************************** 查找 ******************************************/
 // connection.query('SELECT * FROM word', function (err, result) {
 //     result.map((item) => {
 //         let string = JSON.stringify(item);
