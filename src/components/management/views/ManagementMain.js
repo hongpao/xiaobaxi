@@ -3,7 +3,7 @@
  */
 
 const ManagementMain = (props) => {
-    let {createInfo, tag, id, managementAction,getContent} = props;
+    let {createInfo, tag, id, managementAction, getContent} = props;
 
     return (
         <div className="main-content">
@@ -40,7 +40,10 @@ const ManagementMain = (props) => {
                 </label>
                 <label className="form-tr clearfix">
                     <span className="title">封面</span>
-                    <div className="faceImg"></div>
+                    <div className="faceImgBox">
+                        <img src={createInfo.faceImagePath} className="faceImage"/>
+                        <input type="file" name="Multiple" className="fileBtn" onChange={managementAction.uploadImage}/>
+                    </div>
                     <span className="error"></span>
                 </label>
                 <label className="form-tr clearfix">

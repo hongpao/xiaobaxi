@@ -13,7 +13,7 @@ const savePageData = function (createInfo, options) {
     options.contentType = "application/x-www-form-urlencoded";
     options.params = {
         content: createInfo.content,
-        faceImage: createInfo.faceImage,
+        faceImage: createInfo.faceImagePath,
         title: createInfo.title,
         tags: createInfo.tags.toString(),
         author: "hongpao"

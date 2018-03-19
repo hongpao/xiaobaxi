@@ -15,7 +15,8 @@ const URL = {
     // API_UPLOAD_FILES: BASE_URL.API_BASE_URL + "/upfileandlist",
 
 
-    API_SAVE_INFO: "http://localhost:1280/save"
+    API_SAVE_INFO: "http://localhost:1280/save",
+    API_UPLOAD_FILES: "http://localhost:1280/uploadFiles"
 };
 
 module.exports = URL;

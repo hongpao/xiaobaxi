@@ -3,7 +3,7 @@
  */
 
 const Article = {
-    create(params, connection) {
+    create(params, connection, res) {
         let {content, faceImage, title, tags, author} = params;
 
         //word表里的字段，如果是全插入，则不需要列出字段名
@@ -21,6 +21,11 @@ const Article = {
             if (err) {
                 console.log('[INSERT ERROR] - ', err.message);
             }
+
+            res.send({
+                code: 1,
+                data: {}
+            });
         });
     },
 

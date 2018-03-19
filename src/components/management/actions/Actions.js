@@ -6,6 +6,7 @@ import AppDispatcher from '../../../dispatcher/AppDispatcher';
 import AppConstants from '../../../constants/AppConstants';
 
 import saveInfo from '../apis/saveInfoApi';
+import uploadFile from '../apis/uploadFileApi';
 
 const ManagementActions = {
 
@@ -64,6 +65,39 @@ const ManagementActions = {
                 }
             }
         });
+    },
+
+    /*
+    * 上传图片
+    * */
+    uploadImage() {
+        let form = new FormData();
+        let file = document.getElementsByName("Multiple")[0];
+
+        //获取选中资源的数组
+        let fileList = file.files;
+
+        let item = fileList[0];
+        let fileType = item.type.toLocaleLowerCase();
+
+        //符合格式的后缀
+        let imageFormat = ['image/png', 'image/jpeg', 'image/gif'];
+
+        if (imageFormat.indexOf(fileType) > -1) {
+            form.append('image', item);
+
+            uploadFile({
+                data: form,
+                success: function (result) {
+                    if (result.code === 1) {
+                        AppDispatcher.dispatch({
+                            actionType: AppConstants.CREATE_INFO,
+                            data: {type: 3, faceImagePath: result.path}
+                        });
+                    }
+                }
+            });
+        }
     }
 };
 

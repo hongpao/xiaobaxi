@@ -16,7 +16,7 @@ const ManagementStores = assign({}, EventEmitter.prototype, {
     createInfo: {
         title: "",
         tags: [],
-        faceImage: "",
+        faceImagePath: "",
     },
     tag: "",
 
@@ -38,6 +38,9 @@ const ManagementStores = assign({}, EventEmitter.prototype, {
                 break;
             case 2:
                 this.tag = data.tag.trim();
+                break;
+            case 3:
+                createInfo.faceImagePath = window.location.origin + data.faceImagePath;
                 break;
         }
 

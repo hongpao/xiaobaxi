@@ -84,7 +84,7 @@
   color: #fff;
   border: none;
 }
-.create-info-form .form-tr .faceImg {
+.create-info-form .form-tr .faceImgBox {
   border: 1px #d2d2d2 solid;
   width: 100px;
   height: 100px;
@@ -92,7 +92,7 @@
   position: relative;
   margin-right: 20px;
 }
-.create-info-form .form-tr .faceImg:before {
+.create-info-form .form-tr .faceImgBox:before {
   content: '';
   position: absolute;
   top: 20px;
@@ -101,7 +101,7 @@
   height: 60px;
   background-color: #d2d2d2;
 }
-.create-info-form .form-tr .faceImg:after {
+.create-info-form .form-tr .faceImgBox:after {
   content: '';
   position: absolute;
   top: 50px;
@@ -109,6 +109,23 @@
   width: 60px;
   height: 1px;
   background-color: #d2d2d2;
+}
+.create-info-form .form-tr .faceImgBox .faceImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  z-index: 98;
+}
+.create-info-form .form-tr .faceImgBox .fileBtn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100px;
+  opacity: 0;
+  z-index: 99;
 }
 .create-info-form .form-tr .editor-content {
   float: left;
