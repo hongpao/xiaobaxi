@@ -38,6 +38,7 @@ connection.connect();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+
 /*
  *  接收异步请求,保存文章
  */
@@ -45,6 +46,7 @@ app.post('/save', (req, res) => {
     aca.allow(res); //允许跨域设置
     Article.create(req.body, connection, res);  //获取参数，存入数据库
 });
+
 
 /*
 * 上传图片
@@ -63,8 +65,7 @@ app.post('/uploadFiles', (req, res) => {
     upload(req, res, (err) => {
         //允许跨域设置
         aca.allow(res);
-        res.send(
-            {
+        res.send({
                 code: 1,
                 path: `/images/uploads/${req.file.filename}`
             }
