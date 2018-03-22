@@ -9,6 +9,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const multer = require('multer');
+const path = require('path');
+const os = require('os');
+const net = require('net');
 
 
 //引入模块
@@ -19,7 +22,10 @@ const Article = require('./operating/article');
 const app = express();
 
 //配置静态资源访问
-app.use('/image', express.static('../images'));
+app.use('/public', express.static('../public'));
+app.use('/css', express.static('../css'));
+app.use('/images', express.static('../images'));
+app.use('/assets', express.static('../assets'));
 
 /*
 * 初始化数据库
@@ -38,20 +44,37 @@ connection.connect();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+/*==============================================================================*/
+app.get('/', (req, res) => {
+    console.log('hostname', os.hostname());
+    console.log('cpus', os.cpus());
+    console.log('arch', os.arch());
+    console.log('homedir', os.homedir());
+    console.log('loadavg', os.loadavg());
+    console.log('type', os.type());
+    console.log('uptime', os.uptime());
 
-/*
+    console.log('req', req.socket.remoteAddress);
+    res.sendFile(path.resolve('../page/management.html'));
+});
+
+/*******************************************************************************
+ *
  *  接收异步请求,保存文章
- */
+ *
+ *******************************************************************************/
 app.post('/save', (req, res) => {
     aca.allow(res); //允许跨域设置
     Article.create(req.body, connection, res);  //获取参数，存入数据库
 });
 
 
-/*
-* 上传图片
-* https://github.com/expressjs/multer/blob/master/doc/README-zh-cn.md
-* */
+/*******************************************************************************
+ *
+ * 上传图片
+ * https://github.com/expressjs/multer/blob/master/doc/README-zh-cn.md
+ *
+ * ******************************************************************************/
 let storage = multer.diskStorage({
     destination: function (req, file, cb) { // 保存的路径，是用来确定上传的文件应该存储在哪个文件夹中
         cb(null, '../images/uploads/');
