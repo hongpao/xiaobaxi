@@ -2,24 +2,29 @@
  * Created by hongpao on 2018/3/23.
  */
 
-import ReactSwipe from 'react-swipes';
+import ReactSwipe from 'react-swipe';
 
 const Swipe = (props) => {
+    let {bannerImagePath} = props;
     let opt = {
-        // distance: 620, // 每次移动的距离，卡片的真实宽度
-        // currentPoint: 1,// 初始位置，默认从0即第一个元素开始
-        autoPlay: true // 是否开启自动播放
+        startSlide: 0,
+        speed: 500,
+        auto: 3000,
+        continuous: true
     };
 
     return (
-        <div>
-            <ReactSwipe className="swipe" options={opt}>
-                <div>1</div>
-                <div>2</div>
-                <div>3</div>
-                <div>4</div>
-            </ReactSwipe>
-        </div>
+        <ReactSwipe className="swipe" swipeOptions={opt}>
+            {
+                bannerImagePath.map((item, index) => {
+                    return (
+                        <div className="bannerBg" style={{backgroundImage: 'url(' + item.path + ')'}}>
+
+                        </div>
+                    );
+                })
+            }
+        </ReactSwipe>
     );
 };
 

@@ -12,10 +12,23 @@ import {EventEmitter} from 'events';
 const CHANGE_EVENT = "change";
 
 const IndexStore = assign({}, EventEmitter.prototype, {
+    bannerImagePath: [
+        {
+            id: 145352532,
+            path: '/images/banner/IMG_4405.jpg',
+            name: ""
+        }, {
+            id: 23423535,
+            path: '/images/banner/IMG_4504.jpg',
+            name: ""
+        }
+    ],
 
     //获取全部数据
     getNewData() {
-        return {};
+        return {
+            bannerImagePath: this.bannerImagePath
+        };
     },
 
     //保存编辑后的数据

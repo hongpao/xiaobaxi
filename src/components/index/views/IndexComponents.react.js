@@ -35,7 +35,7 @@ class IndexComponents extends Component {
         return (
             <div className="whole-main">
                 <Navigation/>
-                <Swipe/>
+                <Swipe bannerImagePath={this.state.bannerImagePath}/>
             </div>
         );
     }
