@@ -11,6 +11,8 @@ import IndexAction from '../action/Actions';
 import IndexStore from '../store/Stores';
 
 import Swipe from './Swipe';
+import LeftBox from './LeftBox';
+import RightBox from './RightBox';
 
 class IndexComponents extends Component {
     constructor(props) {
@@ -36,6 +38,10 @@ class IndexComponents extends Component {
             <div className="whole-main">
                 <Navigation/>
                 <Swipe bannerImagePath={this.state.bannerImagePath}/>
+                <div className="whole-content clearfix">
+                    <LeftBox/>
+                    <RightBox/>
+                </div>
             </div>
         );
     }

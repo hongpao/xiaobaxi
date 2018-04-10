@@ -21,6 +21,10 @@ const IndexStore = assign({}, EventEmitter.prototype, {
             id: 23423535,
             path: '/images/banner/IMG_4504.jpg',
             name: ""
+        }, {
+            id: 1425335,
+            path: '/images/banner/nihonn.png',
+            name: ""
         }
     ],
 
