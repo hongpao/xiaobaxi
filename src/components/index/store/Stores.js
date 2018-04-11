@@ -12,21 +12,7 @@ import {EventEmitter} from 'events';
 const CHANGE_EVENT = "change";
 
 const IndexStore = assign({}, EventEmitter.prototype, {
-    bannerImagePath: [
-        {
-            id: 145352532,
-            path: '/images/banner/IMG_4405.jpg',
-            name: ""
-        }, {
-            id: 23423535,
-            path: '/images/banner/IMG_4504.jpg',
-            name: ""
-        }, {
-            id: 1425335,
-            path: '/images/banner/nihonn.png',
-            name: ""
-        }
-    ],
+    bannerImagePath: [],
 
     //获取全部数据
     getNewData() {
@@ -35,25 +21,11 @@ const IndexStore = assign({}, EventEmitter.prototype, {
         };
     },
 
-    //保存编辑后的数据
-    // _setSaveInfo(data) {
-    //     let createInfo = this.createInfo;
-    //
-    //     switch (data.type) {
-    //         case 1:
-    //             createInfo.title = data.title;
-    //             break;
-    //         case 2:
-    //             this.tag = data.tag.trim();
-    //             break;
-    //         case 3:
-    //             createInfo.faceImagePath = window.location.origin + data.faceImagePath;
-    //             break;
-    //     }
-    //
-    //     this.createInfo = createInfo;
-    //     this.emit(CHANGE_EVENT);
-    // },
+    //保存banner图片
+    _setBannerImage(data) {
+        this.bannerImagePath = data;
+        this.emit(CHANGE_EVENT);
+    },
 
     addChangeListener: function (callback) {
         this.on(CHANGE_EVENT, callback);
@@ -65,9 +37,9 @@ const IndexStore = assign({}, EventEmitter.prototype, {
 
 AppDispatcher.register(function (action) {
     switch (action.actionType) {
-        // case AppConstants.CREATE_INFO:
-        //     IndexStore._setSaveInfo(action.data);
-        //     break;
+        case AppConstants.BANNER_IMAGE:
+            IndexStore._setBannerImage(action.data);
+            break;
     }
 });
 

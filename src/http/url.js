@@ -7,7 +7,8 @@
 // const BASE_URL = require(ENV_BASE_URL); //域名
 
 const BASE_URL = {
-    API_BASE_URL: "http://upload.2dfire-daily.com"
+    // API_BASE_URL: "http://upload.2dfire-daily.com"
+    API_BASE_URL: "http://localhost:1280"
 };
 
 const URL = {
@@ -15,8 +16,9 @@ const URL = {
     // API_UPLOAD_FILES: BASE_URL.API_BASE_URL + "/upfileandlist",
 
 
-    API_SAVE_INFO: "http://localhost:1280/save",
-    API_UPLOAD_FILES: "http://localhost:1280/uploadFiles"
+    API_SAVE_INFO: BASE_URL.API_BASE_URL + "/save",
+    API_UPLOAD_FILES: BASE_URL.API_BASE_URL + "/uploadFiles",
+    API_GET_BANNER_PATH: BASE_URL.API_BASE_URL + "/getBannerImagePath",
 };
 
 module.exports = URL;

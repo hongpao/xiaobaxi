@@ -8,4 +8,5 @@ module.exports = keyMirror({
     CREATE_INFO: null,
     ADD_TAG: null,
     DELETE_TAG: null,
+    BANNER_IMAGE: null,
 });

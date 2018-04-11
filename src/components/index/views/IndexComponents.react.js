@@ -6,6 +6,7 @@ import React, {Component} from 'react';
 import {render} from 'react-dom';
 
 import Navigation from '../../common/views/Navigation';
+import Footer from '../../common/views/Footer';
 
 import IndexAction from '../action/Actions';
 import IndexStore from '../store/Stores';
@@ -22,6 +23,7 @@ class IndexComponents extends Component {
 
     componentDidMount() {
         IndexStore.addChangeListener(this._onChange);
+        IndexAction.getBannerImagePath();
     }
 
     componentWillUnmount() {
@@ -29,7 +31,7 @@ class IndexComponents extends Component {
     }
 
     _onChange = () => {
-        // this.setState(ManagementStore.getNewData());
+        this.setState(IndexStore.getNewData());
     };
 
 
@@ -42,6 +44,7 @@ class IndexComponents extends Component {
                     <LeftBox/>
                     <RightBox/>
                 </div>
+                <Footer/>
             </div>
         );
     }

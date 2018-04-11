@@ -2,7 +2,7 @@
  * Created by hongpao on 2018/3/15.
  */
 
-const Article = {
+const article = {
     create(params, connection, res) {
         let {content, faceImage, title, tags, author} = params;
 
@@ -58,4 +58,4 @@ const Article = {
     }
 };
 
-module.exports = Article;
+module.exports = article;

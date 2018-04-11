@@ -38,14 +38,14 @@ const ManagementMain = (props) => {
                             ) : null
                     }
                 </label>
-                <label className="form-tr clearfix">
+                <div className="form-tr clearfix">
                     <span className="title">封面</span>
                     <div className="faceImgBox">
                         <img src={createInfo.faceImagePath} className="faceImage"/>
                         <input type="file" name="Multiple" className="fileBtn" onChange={managementAction.uploadImage}/>
                     </div>
                     <span className="error"></span>
-                </label>
+                </div>
                 <label className="form-tr clearfix">
                     <span className="title">内容</span>
                     <div className="editor-content">

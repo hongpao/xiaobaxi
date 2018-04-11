@@ -8,24 +8,26 @@ const Swipe = (props) => {
     let {bannerImagePath} = props;
     let opt = {
         startSlide: 0,
-        speed: 500,
+        speed: 1000,
         auto: 3000,
         continuous: true
     };
 
-    return (
-        <ReactSwipe className="swipe" swipeOptions={opt}>
-            {
-                bannerImagePath.map((item, index) => {
-                    return (
-                        <div className="bannerBg" style={{backgroundImage: 'url(' + item.path + ')'}}>
-
-                        </div>
-                    );
-                })
-            }
-        </ReactSwipe>
-    );
+    if (bannerImagePath.length > 0) {
+        return (
+            <ReactSwipe className="swipe" swipeOptions={opt}>
+                {
+                    bannerImagePath.map((item, index) => {
+                        return (
+                            <div className="bannerBg" style={{backgroundImage: 'url(' + item + ')'}} key={index}></div>
+                        );
+                    })
+                }
+            </ReactSwipe>
+        );
+    } else {
+        return null;
+    }
 };
 
 export default Swipe;
