@@ -1102,6 +1102,10 @@ module.exports = warning;
 "use strict";
 
 
+var _LoginComponents = __webpack_require__(38);
+
+var _LoginComponents2 = _interopRequireDefault(_LoginComponents);
+
 var _ManagementComponents = __webpack_require__(15);
 
 var _ManagementComponents2 = _interopRequireDefault(_ManagementComponents);
@@ -1112,14 +1116,18 @@ var _IndexComponents2 = _interopRequireDefault(_IndexComponents);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_ManagementComponents2.default.init();
+_LoginComponents2.default.init();
 
-//首页
+//后台管理系统
 /**
  * Created by hongpao on 2018/3/12.
  */
 
-//后台管理系统
+//用户登录系统
+
+_ManagementComponents2.default.init();
+
+//首页
 
 _IndexComponents2.default.init();
 
@@ -1258,6 +1266,17 @@ var ManagementMain = function ManagementMain(props) {
         getContent = props.getContent;
 
 
+    var faceImagePart = [];
+    if (createInfo.faceImagePath === "") {
+        faceImagePart.push(React.createElement(
+            "div",
+            { className: "faceImgBox" },
+            React.createElement("input", { type: "file", name: "Multiple", className: "fileBtn", onChange: managementAction.uploadImage })
+        ));
+    } else {
+        faceImagePart.push(React.createElement("img", { src: createInfo.faceImagePath, className: "faceImage" }));
+    }
+
     return React.createElement(
         "div",
         { className: "main-content" },
@@ -1313,12 +1332,7 @@ var ManagementMain = function ManagementMain(props) {
                     { className: "title" },
                     "\u5C01\u9762"
                 ),
-                React.createElement(
-                    "div",
-                    { className: "faceImgBox" },
-                    React.createElement("img", { src: createInfo.faceImagePath, className: "faceImage" }),
-                    React.createElement("input", { type: "file", name: "Multiple", className: "fileBtn", onChange: managementAction.uploadImage })
-                ),
+                faceImagePart,
                 React.createElement("span", { className: "error" })
             ),
             React.createElement(
@@ -1823,7 +1837,7 @@ var savePageData = function savePageData(createInfo, options) {
         faceImage: createInfo.faceImagePath,
         title: createInfo.title,
         tags: createInfo.tags.toString(),
-        author: "hongpao"
+        author: "一只不喜欢滚的轮胎"
     };
 
     return _ajax2.default.ajax(options);
@@ -2016,27 +2030,27 @@ var _Navigation = __webpack_require__(11);
 
 var _Navigation2 = _interopRequireDefault(_Navigation);
 
-var _Footer = __webpack_require__(37);
+var _Footer = __webpack_require__(24);
 
 var _Footer2 = _interopRequireDefault(_Footer);
 
-var _Actions = __webpack_require__(24);
+var _Actions = __webpack_require__(25);
 
 var _Actions2 = _interopRequireDefault(_Actions);
 
-var _Stores = __webpack_require__(26);
+var _Stores = __webpack_require__(27);
 
 var _Stores2 = _interopRequireDefault(_Stores);
 
-var _Swipe = __webpack_require__(27);
+var _Swipe = __webpack_require__(28);
 
 var _Swipe2 = _interopRequireDefault(_Swipe);
 
-var _LeftBox = __webpack_require__(35);
+var _LeftBox = __webpack_require__(36);
 
 var _LeftBox2 = _interopRequireDefault(_LeftBox);
 
-var _RightBox = __webpack_require__(36);
+var _RightBox = __webpack_require__(37);
 
 var _RightBox2 = _interopRequireDefault(_RightBox);
 
@@ -2118,6 +2132,31 @@ exports.default = { init: init };
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+/**
+ * Created by hongpao on 2018/4/11.
+ */
+
+var Footer = function Footer() {
+
+    return React.createElement(
+        "div",
+        { className: "footer" },
+        "\u7EA2\u888D\u7684\u5B9E\u6218\u6F14\u7EC3\u573A 2018.3.23"
+    );
+};
+
+exports.default = Footer;
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
 var _AppDispatcher = __webpack_require__(1);
 
@@ -2127,7 +2166,7 @@ var _AppConstants = __webpack_require__(3);
 
 var _AppConstants2 = _interopRequireDefault(_AppConstants);
 
-var _getBannerApi = __webpack_require__(25);
+var _getBannerApi = __webpack_require__(26);
 
 var _getBannerApi2 = _interopRequireDefault(_getBannerApi);
 
@@ -2157,7 +2196,7 @@ var IndexAction = {
 exports.default = IndexAction;
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2189,7 +2228,7 @@ var getBannerImagePath = function getBannerImagePath(options) {
 module.exports = getBannerImagePath;
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2260,7 +2299,7 @@ _AppDispatcher2.default.register(function (action) {
 exports.default = IndexStore;
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2270,7 +2309,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _reactSwipe = __webpack_require__(28);
+var _reactSwipe = __webpack_require__(29);
 
 var _reactSwipe2 = _interopRequireDefault(_reactSwipe);
 
@@ -2304,7 +2343,7 @@ var Swipe = function Swipe(props) {
 exports.default = Swipe;
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2316,7 +2355,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _propTypes = __webpack_require__(29);
+var _propTypes = __webpack_require__(30);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -2324,7 +2363,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _swipeJsIso = __webpack_require__(34);
+var _swipeJsIso = __webpack_require__(35);
 
 var _swipeJsIso2 = _interopRequireDefault(_swipeJsIso);
 
@@ -2490,7 +2529,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {/**
@@ -2515,17 +2554,17 @@ if (process.env.NODE_ENV !== 'production') {
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(30)(isValidElement, throwOnDirectAccess);
+  module.exports = __webpack_require__(31)(isValidElement, throwOnDirectAccess);
 } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(33)();
+  module.exports = __webpack_require__(34)();
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2541,10 +2580,10 @@ if (process.env.NODE_ENV !== 'production') {
 var emptyFunction = __webpack_require__(8);
 var invariant = __webpack_require__(2);
 var warning = __webpack_require__(13);
-var assign = __webpack_require__(31);
+var assign = __webpack_require__(32);
 
 var ReactPropTypesSecret = __webpack_require__(9);
-var checkPropTypes = __webpack_require__(32);
+var checkPropTypes = __webpack_require__(33);
 
 module.exports = function(isValidElement, throwOnDirectAccess) {
   /* global Symbol */
@@ -3075,7 +3114,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3172,7 +3211,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3239,7 +3278,7 @@ module.exports = checkPropTypes;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3304,7 +3343,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports) {
 
 /*
@@ -3875,7 +3914,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4052,7 +4091,7 @@ var LeftBox = function LeftBox(props) {
 exports.default = LeftBox;
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4125,7 +4164,7 @@ var RightBox = function RightBox(props) {
 exports.default = RightBox;
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4134,20 +4173,127 @@ exports.default = RightBox;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-/**
- * Created by hongpao on 2018/4/11.
- */
 
-var Footer = function Footer() {
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-    return React.createElement(
-        "div",
-        { className: "footer" },
-        "\u7EA2\u888D\u7684\u5B9E\u6218\u6F14\u7EC3\u573A 2018.3.23"
-    );
-};
+var _react = __webpack_require__(4);
 
-exports.default = Footer;
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(10);
+
+var _Footer = __webpack_require__(24);
+
+var _Footer2 = _interopRequireDefault(_Footer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by hongpao on 2018/4/12.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+// import ManagementAction from '../actions/Actions';
+// import ManagementStore from '../stores/Stores';
+
+var LoginComponents = function (_Component) {
+    _inherits(LoginComponents, _Component);
+
+    function LoginComponents(props) {
+        _classCallCheck(this, LoginComponents);
+
+        // this.state = ManagementStore.getNewData();
+        var _this = _possibleConstructorReturn(this, (LoginComponents.__proto__ || Object.getPrototypeOf(LoginComponents)).call(this, props));
+
+        _this._onChange = function () {
+            // this.setState(ManagementStore.getNewData());
+        };
+
+        return _this;
+    }
+
+    _createClass(LoginComponents, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            // ManagementStore.addChangeListener(this._onChange);
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            // ManagementStore.removeChangeListener(this._onChange);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var screenHeight = window.screen.availHeight;
+            return _react2.default.createElement(
+                'div',
+                { className: 'loginBg', style: { backgroundImage: 'url(/images/banner/1.jpeg)' } },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'box' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'title' },
+                        '\u5C0F\u4E8C'
+                    ),
+                    _react2.default.createElement(
+                        'ul',
+                        { className: 'login-info' },
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            _react2.default.createElement('input', { type: 'text', name: 'account', className: 'login-input', placeholder: '\u8D26\u53F7\u3001\u624B\u673A\u53F7\u6216\u90AE\u7BB1' })
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            _react2.default.createElement('input', { type: 'password', name: 'pwd', className: 'login-input', placeholder: '\u5BC6\u7801' })
+                        ),
+                        _react2.default.createElement(
+                            'li',
+                            null,
+                            _react2.default.createElement(
+                                'p',
+                                { className: 'forgot' },
+                                '\u5FD8\u8BB0\u5BC6\u7801\uFF1F'
+                            )
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'btn' },
+                        '\u767B\u5F55'
+                    )
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'newSign' },
+                    '\u6CA1\u6709\u8D26\u53F7\uFF1F',
+                    _react2.default.createElement(
+                        'i',
+                        null,
+                        '\u6CE8\u518C'
+                    )
+                )
+            );
+        }
+    }]);
+
+    return LoginComponents;
+}(_react.Component);
+
+function init() {
+    var root = document.getElementById('J-login');
+    if (root) {
+        (0, _reactDom.render)(_react2.default.createElement(LoginComponents, null), root);
+    }
+}
+
+exports.default = { init: init };
 
 /***/ })
 /******/ ]);

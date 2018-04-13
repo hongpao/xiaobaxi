@@ -5,6 +5,17 @@
 const ManagementMain = (props) => {
     let {createInfo, tag, id, managementAction, getContent} = props;
 
+    let faceImagePart = [];
+    if (createInfo.faceImagePath === "") {
+        faceImagePart.push(
+            <div className="faceImgBox">
+                <input type="file" name="Multiple" className="fileBtn" onChange={managementAction.uploadImage}/>
+            </div>
+        );
+    } else {
+        faceImagePart.push(<img src={createInfo.faceImagePath} className="faceImage"/>);
+    }
+
     return (
         <div className="main-content">
             <div className="ad">
@@ -40,10 +51,7 @@ const ManagementMain = (props) => {
                 </label>
                 <div className="form-tr clearfix">
                     <span className="title">封面</span>
-                    <div className="faceImgBox">
-                        <img src={createInfo.faceImagePath} className="faceImage"/>
-                        <input type="file" name="Multiple" className="fileBtn" onChange={managementAction.uploadImage}/>
-                    </div>
+                    {faceImagePart}
                     <span className="error"></span>
                 </div>
                 <label className="form-tr clearfix">

@@ -16,7 +16,7 @@ const savePageData = function (createInfo, options) {
         faceImage: createInfo.faceImagePath,
         title: createInfo.title,
         tags: createInfo.tags.toString(),
-        author: "hongpao"
+        author: "一只不喜欢滚的轮胎"
     };
 
     return HTTP.ajax(options);
