@@ -5,49 +5,48 @@
 import React, {Component} from 'react';
 import {render} from 'react-dom';
 
-import Footer from '../../common/views/Footer';
+import LoginAction from '../actions/Actions';
+import LoginStore from '../stores/Stores';
 
-// import ManagementAction from '../actions/Actions';
-// import ManagementStore from '../stores/Stores';
+import LoginMain from './LoginMain';
+import RegisteredMain from './RegisteredMain';
 
 class LoginComponents extends Component {
     constructor(props) {
         super(props);
-        // this.state = ManagementStore.getNewData();
+        this.state = LoginStore.getNewData();
     }
 
     componentDidMount() {
-        // ManagementStore.addChangeListener(this._onChange);
+        LoginStore.addChangeListener(this._onChange);
     }
 
     componentWillUnmount() {
-        // ManagementStore.removeChangeListener(this._onChange);
+        LoginStore.removeChangeListener(this._onChange);
     }
 
     _onChange = () => {
-        // this.setState(ManagementStore.getNewData());
+        this.setState(LoginStore.getNewData());
     };
 
     render() {
-        let screenHeight = window.screen.availHeight;
+        let {status} = this.state;
+
+        let showDom = null;
+
+        switch (status) {
+            case 'l':
+                showDom = (<LoginMain {...this.state} LoginAction={LoginAction}/>);
+                break;
+            case 'r':
+                showDom = (<RegisteredMain {...this.state} LoginAction={LoginAction}/>);
+                break;
+
+        }
+
         return (
             <div className="loginBg" style={{backgroundImage: 'url(/images/banner/1.jpeg)'}}>
-                <div className="box">
-                    <div className="title">小二</div>
-                    <ul className="login-info">
-                        <li>
-                            <input type="text" name="account" className="login-input" placeholder="账号、手机号或邮箱"/>
-                        </li>
-                        <li>
-                            <input type="password" name="pwd" className="login-input" placeholder="密码"/>
-                        </li>
-                        <li>
-                            <p className="forgot">忘记密码？</p>
-                        </li>
-                    </ul>
-                    <div className="btn">登录</div>
-                </div>
-                <div className="newSign">没有账号？<i>注册</i></div>
+                {showDom}
             </div>
         );
     }

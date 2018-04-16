@@ -1,69 +1,112 @@
 .loginBg {
   background-size: cover;
   background-repeat: no-repeat;
+  background-color: #b8e5f8;
   width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  .box {
-    background-color: rgba(255, 255, 255, .7);
-    width: 432px;
-    margin: 100px auto 0;
+  height: 100vh;
+  .main-box {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     border-radius: 2px;
-    padding-bottom: 30px;
-    .title {
-      font-family: cursive;
-      font-size: 60px;
-      line-height: 60px;
-      color: #0084ff;
-      text-align: center;
-      padding: 20px 0;
-    }
-    .login-info {
-      padding: 0 40px;
-      li {
-        border-bottom: 1px #d2d2d2 solid;
-        height: 48px;
-        &:last-child {
-          border: none;
-        }
-        .login-input {
-          border: none;
+    min-height: 688px;
+    height: calc(100% - 42px);
+    box-sizing: border-box;
+    .box {
+      background-color: rgba(255, 255, 255, .7);
+      width: 432px;
+      margin: 200px auto 0;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      padding-bottom: 30px;
+      .title {
+        font-family: cursive;
+        font-size: 60px;
+        line-height: 60px;
+        color: #0084ff;
+        text-align: center;
+        padding: 20px 0;
+      }
+      .login-info {
+        padding: 0 40px;
+        li {
+          border-bottom: 1px #e2e2e2 solid;
           height: 48px;
-          line-height: 48px;
-          font-size: 14px;
-          background-color: transparent;
-        }
-        .forgot {
-          display: inline-block;
-          float: right;
-          font-size: 14px;
-          line-height: 30px;
-          color: #8590a6;
+          &:last-child {
+            border: none;
+          }
+          .login-input {
+            border: none;
+            height: 48px;
+            line-height: 48px;
+            font-size: 14px;
+            width: 100%;
+            background-color: transparent;
+          }
+          .forgot {
+            display: inline-block;
+            float: right;
+            font-size: 14px;
+            line-height: 30px;
+            color: #8590a6;
+          }
         }
       }
+      .btn {
+        height: 36px;
+        color: #fff;
+        background-color: #0084ff;
+        padding: 0 16px;
+        font-size: 14px;
+        line-height: 32px;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 3px;
+        margin: 30px 40px 0;
+        user-select: none;
+      }
     }
-    .btn {
-      height: 36px;
-      color: #fff;
-      background-color: #0084ff;
-      padding: 0 16px;
-      font-size: 14px;
-      line-height: 32px;
+    .newSign {
+      width: 432px;
+      background-color: #f6f6f6;
+      height: 58px;
+      line-height: 58px;
       text-align: center;
-      cursor: pointer;
-      border-radius: 3px;
-      margin: 30px 40px 0;
+      border-top: 1px solid #ebebeb;
+      font-size: 16px;
+      margin: 0 auto;
+      border-bottom-left-radius: 4px;
+      border-bottom-right-radius: 4px;
+      user-select: none;
+      i {
+        color: #8590a6;
+      }
     }
-  }
-  .newSign {
-    width: 432px;
-    background-color: #f6f6f6;
-    height: 58px;
-    border-top: 1px solid #ebebeb;
-    font-size: 16px;
-    margin: 0 auto;
+    .download {
+      margin: 30px auto;
+      background: #8590a6;
+      border: none;
+      color: #000;
+      width: 432px;
+      height: 42px;
+      line-height: 42px;
+      text-align: center;
+      border-radius: 4px;
+      user-select: none;
+      cursor: pointer;
+    }
   }
 }

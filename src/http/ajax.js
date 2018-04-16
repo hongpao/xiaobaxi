@@ -44,7 +44,7 @@ const HTTP = {
             let success = options.success || undefined;
             let complete = options.complete || undefined;
             let error = options.error || undefined;
-            let contentType = "application/x-www-form-urlencoded;application/json;charset=utf-8;";
+            let contentType = "application/x-www-form-urlencoded";
             let processData = true;
             let async = true;
             let cache = false;

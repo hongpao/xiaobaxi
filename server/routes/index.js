@@ -6,7 +6,7 @@ const fs = require('fs');
 const path = require('path');
 
 //路径地址
-const bannerImagePath = '../images/banner/';
+const bannerImagePath = './images/banner/';
 
 const index = {
     getBannerImagePath(app, aca) {

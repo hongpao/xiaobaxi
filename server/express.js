@@ -15,15 +15,16 @@ const article = require('./operating/article');
 const PageRoute = require('./routes/route');
 const IndexDid = require('./routes/index');
 const ManagementDid = require('./routes/management');
+const LoginPort = require('./routes/login');
 
 //初始化
 const app = express();
 
 //配置静态资源访问
-app.use('/public', express.static('../public'));
-app.use('/css', express.static('../css'));
-app.use('/images', express.static('../images'));
-app.use('/assets', express.static('../assets'));
+app.use('/public', express.static('./public'));
+app.use('/css', express.static('./css'));
+app.use('/images', express.static('./images'));
+app.use('/assets', express.static('./assets'));
 
 /*
 * 初始化数据库
@@ -51,6 +52,7 @@ PageRoute.main(app);
 IndexDid.getBannerImagePath(app, aca);
 // ManagementDid.save(app, aca, article, connection);        //异步请求,保存文章
 ManagementDid.upload(app, aca);                             //上传图片
+LoginPort.goLogin(app, aca);                                   //登录
 
 //启动服务
 app.listen(1280, () => {

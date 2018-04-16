@@ -5,7 +5,7 @@
 
 const dns = require('dns');
 
-dns.lookup('www.qq.com', function (err, address, family) {
+dns.lookup('www.hujunhao.cn', function (err, address, family) {
     if (err) throw err;
     console.log('例子A: ' + address);
     console.log('例子B: ' + family);

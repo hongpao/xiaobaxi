@@ -19,6 +19,7 @@ const URL = {
     API_SAVE_INFO: BASE_URL.API_BASE_URL + "/save",
     API_UPLOAD_FILES: BASE_URL.API_BASE_URL + "/uploadFiles",
     API_GET_BANNER_PATH: BASE_URL.API_BASE_URL + "/getBannerImagePath",
+    API_GO_LOGIN: BASE_URL.API_BASE_URL + "/login",
 };
 
 module.exports = URL;

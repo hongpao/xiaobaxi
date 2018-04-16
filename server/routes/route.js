@@ -16,7 +16,7 @@ const r = {
             // console.log('type', os.type());
             // console.log('uptime', os.uptime());
             // console.log('req', req.socket.remoteAddress);
-            res.sendFile(path.resolve(`../page${req.originalUrl}`));
+            res.sendFile(path.resolve(`./page${req.originalUrl}`));
         });
     }
 };

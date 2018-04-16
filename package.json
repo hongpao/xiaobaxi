@@ -6,7 +6,8 @@
   "scripts": {
     "xless": "gulp xiaochengxu",
     "oless": "gulp other",
-    "start": "webpack-dev-server --watch --progress --colors --host 0.0.0.0 --port 9000"
+    "start": "webpack-dev-server --watch --progress --colors --host 0.0.0.0 --port 9000",
+    "node": "pm2 start server/express.js --name hp -i max --watch && webpack -w"
   },
   "repository": {
     "type": "git",
