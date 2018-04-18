@@ -5,7 +5,7 @@
 import HTTP from "../../../http/ajax";
 import URL from "../../../http/url";
 
-const goLogin = function (account, password, options) {
+const goLogin = function (account, password, type, options) {
 
     options = options || {};
     options.url = URL.API_GO_LOGIN;
@@ -13,6 +13,7 @@ const goLogin = function (account, password, options) {
     options.params = {
         account: account,
         password: password,
+        type: type
     };
 
     return HTTP.ajax(options);

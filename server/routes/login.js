@@ -11,8 +11,11 @@ const login = {
         let _self = this;
 
         app.post('/login', (req, res) => {
-            let {account, password} = req.body;
+            let {account, password, type} = req.body;
 
+            console.log('account:', account);
+            console.log('password:', password);
+            console.log('type:', type);
             /*
             * 用户密码需要加密
             * */

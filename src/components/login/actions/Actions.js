@@ -26,15 +26,15 @@ const LoginActions = {
         });
     },
 
-    //注册
-    registered(account, password) {
-    },
-
     /*
-    * 点击登录
+    * 点击登录\注册
     * */
-    login(account, password) {
-        goLogin(account, password, {
+    login(account, password, type) {
+
+        //注册判断
+        if (type === 'r') {
+        }
+        goLogin(account, password, type, {
             success: function (result) {
                 if (result.code === 1) {
                     let data = result.data || {};

@@ -15,13 +15,15 @@ const LoginStores = assign({}, EventEmitter.prototype, {
     status: "l",    //l：登录   r：注册
     account: "",
     password: "",
+    confirmPassword: "",
 
     //获取全部数据
     getNewData() {
         return {
             status: this.status,
             account: this.account,
-            password: this.password
+            password: this.password,
+            confirmPassword: this.confirmPassword
         };
     },
 
@@ -38,6 +40,9 @@ const LoginStores = assign({}, EventEmitter.prototype, {
                 break;
             case 3:
                 this.status = content;
+                break;
+            case 4:
+                this.confirmPassword = content;
                 break;
         }
 

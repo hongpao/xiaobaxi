@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/assets/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 14);
+/******/ 	return __webpack_require__(__webpack_require__.s = 15);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -360,6 +360,164 @@ module.exports = invariant;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/*
+ *  Create by hongpao
+ *  on 17/10/24
+ *  异步请求处理公用方法
+ * */
+
+var HTTP = {
+    ajax: function ajax(options) {
+        setTimeout(function () {
+            HTTP._ajax(options);
+        }, 0);
+    },
+    beforeSendHandler: function beforeSendHandler() {},
+    completeHandler: function completeHandler() {},
+    successHandler: function successHandler(success, result) {
+        if (result.code) {
+            if (result.code === 1) {
+                if (success !== undefined) {
+                    success(result);
+                }
+            } else if (result.code === -1) {
+                window.location.href = result.data.url || "";
+            }
+        }
+    },
+    errorHandler: function errorHandler() {},
+    _ajax: function _ajax(options) {
+        if ((typeof options === "undefined" ? "undefined" : _typeof(options)) === "object") {
+
+            //异步请求默认初始值
+            var type = 'get';
+            var timeout = 15000;
+            var isShowLoading = true;
+            var url = options.url;
+            var data = options.params || {};
+            var _beforeSend = options.beforeSend || undefined;
+            var reload = options.reload || undefined;
+            var _success = options.success || undefined;
+            var complete = options.complete || undefined;
+            var error = options.error || undefined;
+            var contentType = "application/x-www-form-urlencoded";
+            var processData = true;
+            var async = true;
+            var cache = false;
+
+            //若有传值，则替换
+            if (options.type !== undefined) {
+                type = options.type;
+            }
+            if (options.contentType !== undefined) {
+                contentType = options.contentType;
+            }
+            if (options.processData !== undefined) {
+                processData = options.processData;
+            }
+            if (options.timeout !== undefined) {
+                timeout = options.timeout;
+            }
+            if (options.showLoading !== undefined) {
+                isShowLoading = options.showLoading;
+            }
+
+            //时间戳，防止缓存
+            // let t = new Date();
+
+            //默认需要添加的参数
+            // data.t = t.getTime();
+
+            var self = this;
+
+            $.ajax({
+                type: type,
+                url: url,
+                dataType: 'json',
+                crossDomain: true,
+                data: data,
+                timeout: timeout,
+                contentType: contentType,
+                processData: processData,
+                async: async,
+                cache: cache,
+                beforeSend: function beforeSend() {
+                    if (_beforeSend) {
+                        self.beforeSendHandler();
+                    }
+                },
+                success: function success(result) {
+                    self.successHandler(_success, result);
+                },
+                complete: function complete() {
+                    if (self.complete) {
+                        self.completeHandler();
+                    }
+                },
+                error: function error(xhr, type, _error) {
+                    var resp = {
+                        xhr: xhr,
+                        type: type,
+                        error: _error
+                    };
+                    console.log("ajax error: ", resp);
+                    self.errorHandler(resp);
+                }
+            });
+        } else {
+            throw new Error("options must's object");
+        }
+    }
+};
+
+exports.default = HTTP;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/*
+ *  Create by hongpao
+ *  on 18/3/13
+ *  异步请求接口列表
+ * */
+
+// const BASE_URL = require(ENV_BASE_URL); //域名
+
+var BASE_URL = {
+    // API_BASE_URL: "http://upload.2dfire-daily.com"
+    API_BASE_URL: "http://localhost:1280"
+};
+
+var URL = {
+    //获取资源地址列表
+    // API_UPLOAD_FILES: BASE_URL.API_BASE_URL + "/upfileandlist",
+
+
+    API_SAVE_INFO: BASE_URL.API_BASE_URL + "/save",
+    API_UPLOAD_FILES: BASE_URL.API_BASE_URL + "/uploadFiles",
+    API_GET_BANNER_PATH: BASE_URL.API_BASE_URL + "/getBannerImagePath",
+    API_GO_LOGIN: BASE_URL.API_BASE_URL + "/login"
+};
+
+module.exports = URL;
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 /*
 object-assign
 (c) Sindre Sorhus
@@ -453,13 +611,79 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 6 */
+/* 8 */
 /***/ (function(module, exports) {
 
 module.exports = ReactDOM;
 
 /***/ }),
-/* 7 */
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _AppDispatcher = __webpack_require__(0);
+
+var _AppDispatcher2 = _interopRequireDefault(_AppDispatcher);
+
+var _AppConstants = __webpack_require__(2);
+
+var _AppConstants2 = _interopRequireDefault(_AppConstants);
+
+var _goLoginApi = __webpack_require__(19);
+
+var _goLoginApi2 = _interopRequireDefault(_goLoginApi);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var LoginActions = {
+    setLoginInfo: function setLoginInfo(type, e) {
+        var content = e.target.value;
+
+        _AppDispatcher2.default.dispatch({
+            actionType: _AppConstants2.default.USER_LOGIN_INFO,
+            data: { type: type, content: content }
+        });
+    },
+
+
+    //去注册
+    toRegistered: function toRegistered(style) {
+        _AppDispatcher2.default.dispatch({
+            actionType: _AppConstants2.default.USER_LOGIN_INFO,
+            data: { type: 3, content: style }
+        });
+    },
+
+
+    /*
+    * 点击登录\注册
+    * */
+    login: function login(account, password, type) {
+
+        //注册判断
+        if (type === 'r') {}
+        (0, _goLoginApi2.default)(account, password, type, {
+            success: function success(result) {
+                if (result.code === 1) {
+                    var data = result.data || {};
+                }
+            }
+        });
+    }
+}; /**
+    * Created by hongpao on 2018/4/13.
+    */
+
+exports.default = LoginActions;
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -767,165 +991,7 @@ function isUndefined(arg) {
 
 
 /***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/*
- *  Create by hongpao
- *  on 17/10/24
- *  异步请求处理公用方法
- * */
-
-var HTTP = {
-    ajax: function ajax(options) {
-        setTimeout(function () {
-            HTTP._ajax(options);
-        }, 0);
-    },
-    beforeSendHandler: function beforeSendHandler() {},
-    completeHandler: function completeHandler() {},
-    successHandler: function successHandler(success, result) {
-        if (result.code) {
-            if (result.code === 1) {
-                if (success !== undefined) {
-                    success(result);
-                }
-            } else if (result.code === -1) {
-                window.location.href = result.data.url || "";
-            }
-        }
-    },
-    errorHandler: function errorHandler() {},
-    _ajax: function _ajax(options) {
-        if ((typeof options === "undefined" ? "undefined" : _typeof(options)) === "object") {
-
-            //异步请求默认初始值
-            var type = 'get';
-            var timeout = 15000;
-            var isShowLoading = true;
-            var url = options.url;
-            var data = options.params || {};
-            var _beforeSend = options.beforeSend || undefined;
-            var reload = options.reload || undefined;
-            var _success = options.success || undefined;
-            var complete = options.complete || undefined;
-            var error = options.error || undefined;
-            var contentType = "application/x-www-form-urlencoded";
-            var processData = true;
-            var async = true;
-            var cache = false;
-
-            //若有传值，则替换
-            if (options.type !== undefined) {
-                type = options.type;
-            }
-            if (options.contentType !== undefined) {
-                contentType = options.contentType;
-            }
-            if (options.processData !== undefined) {
-                processData = options.processData;
-            }
-            if (options.timeout !== undefined) {
-                timeout = options.timeout;
-            }
-            if (options.showLoading !== undefined) {
-                isShowLoading = options.showLoading;
-            }
-
-            //时间戳，防止缓存
-            // let t = new Date();
-
-            //默认需要添加的参数
-            // data.t = t.getTime();
-
-            var self = this;
-
-            $.ajax({
-                type: type,
-                url: url,
-                dataType: 'json',
-                crossDomain: true,
-                data: data,
-                timeout: timeout,
-                contentType: contentType,
-                processData: processData,
-                async: async,
-                cache: cache,
-                beforeSend: function beforeSend() {
-                    if (_beforeSend) {
-                        self.beforeSendHandler();
-                    }
-                },
-                success: function success(result) {
-                    self.successHandler(_success, result);
-                },
-                complete: function complete() {
-                    if (self.complete) {
-                        self.completeHandler();
-                    }
-                },
-                error: function error(xhr, type, _error) {
-                    var resp = {
-                        xhr: xhr,
-                        type: type,
-                        error: _error
-                    };
-                    console.log("ajax error: ", resp);
-                    self.errorHandler(resp);
-                }
-            });
-        } else {
-            throw new Error("options must's object");
-        }
-    }
-};
-
-exports.default = HTTP;
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/*
- *  Create by hongpao
- *  on 18/3/13
- *  异步请求接口列表
- * */
-
-// const BASE_URL = require(ENV_BASE_URL); //域名
-
-var BASE_URL = {
-    // API_BASE_URL: "http://upload.2dfire-daily.com"
-    API_BASE_URL: "http://localhost:1280"
-};
-
-var URL = {
-    //获取资源地址列表
-    // API_UPLOAD_FILES: BASE_URL.API_BASE_URL + "/upfileandlist",
-
-
-    API_SAVE_INFO: BASE_URL.API_BASE_URL + "/save",
-    API_UPLOAD_FILES: BASE_URL.API_BASE_URL + "/uploadFiles",
-    API_GET_BANNER_PATH: BASE_URL.API_BASE_URL + "/getBannerImagePath",
-    API_GO_LOGIN: BASE_URL.API_BASE_URL + "/login"
-};
-
-module.exports = URL;
-
-/***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -967,7 +1033,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -986,7 +1052,7 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1008,8 +1074,8 @@ var Navigation = function Navigation(props) {
             { className: "nav-content" },
             React.createElement("img", { src: "../../../../images/rockets.png", className: "logo", alt: "" }),
             React.createElement(
-                "div",
-                { className: "nav-tab" },
+                "a",
+                { href: "index.html", className: "nav-tab" },
                 "\u9996\u9875"
             ),
             React.createElement(
@@ -1029,7 +1095,7 @@ var Navigation = function Navigation(props) {
 exports.default = Navigation;
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1043,7 +1109,7 @@ exports.default = Navigation;
 
 
 
-var emptyFunction = __webpack_require__(10);
+var emptyFunction = __webpack_require__(11);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -1098,21 +1164,21 @@ module.exports = warning;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _LoginComponents = __webpack_require__(15);
+var _LoginComponents = __webpack_require__(16);
 
 var _LoginComponents2 = _interopRequireDefault(_LoginComponents);
 
-var _ManagementComponents = __webpack_require__(20);
+var _ManagementComponents = __webpack_require__(23);
 
 var _ManagementComponents2 = _interopRequireDefault(_ManagementComponents);
 
-var _IndexComponents = __webpack_require__(26);
+var _IndexComponents = __webpack_require__(29);
 
 var _IndexComponents2 = _interopRequireDefault(_IndexComponents);
 
@@ -1134,7 +1200,7 @@ _ManagementComponents2.default.init();
 _IndexComponents2.default.init();
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1152,21 +1218,21 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(6);
+var _reactDom = __webpack_require__(8);
 
-var _Actions = __webpack_require__(16);
+var _Actions = __webpack_require__(9);
 
 var _Actions2 = _interopRequireDefault(_Actions);
 
-var _Stores = __webpack_require__(19);
+var _Stores = __webpack_require__(20);
 
 var _Stores2 = _interopRequireDefault(_Stores);
 
-var _LoginMain = __webpack_require__(42);
+var _LoginMain = __webpack_require__(21);
 
 var _LoginMain2 = _interopRequireDefault(_LoginMain);
 
-var _RegisteredMain = __webpack_require__(43);
+var _RegisteredMain = __webpack_require__(22);
 
 var _RegisteredMain2 = _interopRequireDefault(_RegisteredMain);
 
@@ -1243,73 +1309,6 @@ function init() {
 }
 
 exports.default = { init: init };
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _AppDispatcher = __webpack_require__(0);
-
-var _AppDispatcher2 = _interopRequireDefault(_AppDispatcher);
-
-var _AppConstants = __webpack_require__(2);
-
-var _AppConstants2 = _interopRequireDefault(_AppConstants);
-
-var _goLoginApi = __webpack_require__(41);
-
-var _goLoginApi2 = _interopRequireDefault(_goLoginApi);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var LoginActions = {
-    setLoginInfo: function setLoginInfo(type, e) {
-        var content = e.target.value;
-
-        _AppDispatcher2.default.dispatch({
-            actionType: _AppConstants2.default.USER_LOGIN_INFO,
-            data: { type: type, content: content }
-        });
-    },
-
-
-    //去注册
-    toRegistered: function toRegistered(style) {
-        _AppDispatcher2.default.dispatch({
-            actionType: _AppConstants2.default.USER_LOGIN_INFO,
-            data: { type: 3, content: style }
-        });
-    },
-
-
-    //注册
-    registered: function registered(account, password) {},
-
-
-    /*
-    * 点击登录
-    * */
-    login: function login(account, password) {
-        (0, _goLoginApi2.default)(account, password, {
-            success: function success(result) {
-                if (result.code === 1) {
-                    var data = result.data || {};
-                }
-            }
-        });
-    }
-}; /**
-    * Created by hongpao on 2018/4/13.
-    */
-
-exports.default = LoginActions;
 
 /***/ }),
 /* 17 */
@@ -1616,6 +1615,43 @@ module.exports = keyMirror;
 "use strict";
 
 
+var _ajax = __webpack_require__(5);
+
+var _ajax2 = _interopRequireDefault(_ajax);
+
+var _url = __webpack_require__(6);
+
+var _url2 = _interopRequireDefault(_url);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Created by hongpao on 2018/1/17.
+ */
+
+var goLogin = function goLogin(account, password, type, options) {
+
+    options = options || {};
+    options.url = _url2.default.API_GO_LOGIN;
+    options.type = "post";
+    options.params = {
+        account: account,
+        password: password,
+        type: type
+    };
+
+    return _ajax2.default.ajax(options);
+};
+
+module.exports = goLogin;
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
@@ -1628,11 +1664,11 @@ var _AppConstants = __webpack_require__(2);
 
 var _AppConstants2 = _interopRequireDefault(_AppConstants);
 
-var _objectAssign = __webpack_require__(5);
+var _objectAssign = __webpack_require__(7);
 
 var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-var _events = __webpack_require__(7);
+var _events = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1648,13 +1684,15 @@ var LoginStores = (0, _objectAssign2.default)({}, _events.EventEmitter.prototype
     status: "l", //l：登录   r：注册
     account: "",
     password: "",
+    confirmPassword: "",
 
     //获取全部数据
     getNewData: function getNewData() {
         return {
             status: this.status,
             account: this.account,
-            password: this.password
+            password: this.password,
+            confirmPassword: this.confirmPassword
         };
     },
 
@@ -1674,6 +1712,9 @@ var LoginStores = (0, _objectAssign2.default)({}, _events.EventEmitter.prototype
                 break;
             case 3:
                 this.status = content;
+                break;
+            case 4:
+                this.confirmPassword = content;
                 break;
         }
 
@@ -1701,7 +1742,171 @@ _AppDispatcher2.default.register(function (action) {
 exports.default = LoginStores;
 
 /***/ }),
-/* 20 */
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _Actions = __webpack_require__(9);
+
+var _Actions2 = _interopRequireDefault(_Actions);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Created by hongpao on 2018/4/16.
+ */
+
+var LoginMain = function LoginMain(props) {
+    var account = props.account,
+        password = props.password,
+        LoginAction = props.LoginAction;
+
+    return React.createElement(
+        "div",
+        { className: "main-box" },
+        React.createElement(
+            "div",
+            { className: "box" },
+            React.createElement(
+                "div",
+                { className: "title" },
+                "\u620A\u620C12\u5E74"
+            ),
+            React.createElement(
+                "ul",
+                { className: "login-info" },
+                React.createElement(
+                    "li",
+                    null,
+                    React.createElement("input", { type: "text", name: "account", className: "login-input", value: account,
+                        onChange: LoginAction.setLoginInfo.bind(undefined, 1),
+                        placeholder: "\u8D26\u53F7\u3001\u624B\u673A\u53F7\u6216\u90AE\u7BB1" })
+                ),
+                React.createElement(
+                    "li",
+                    null,
+                    React.createElement("input", { type: "password", name: "pwd", className: "login-input", value: password,
+                        onChange: LoginAction.setLoginInfo.bind(undefined, 2),
+                        placeholder: "\u5BC6\u7801" })
+                ),
+                React.createElement(
+                    "li",
+                    null,
+                    React.createElement(
+                        "p",
+                        { className: "forgot" },
+                        "\u5FD8\u8BB0\u5BC6\u7801\uFF1F"
+                    )
+                )
+            ),
+            React.createElement(
+                "div",
+                { className: "btn", onClick: LoginAction.login.bind(undefined, account, password, 'l') },
+                "\u767B\u5F55"
+            )
+        ),
+        React.createElement(
+            "div",
+            { className: "newSign", onClick: LoginAction.toRegistered.bind(undefined, "r") },
+            "\u6CA1\u6709\u8D26\u53F7\uFF1F",
+            React.createElement(
+                "i",
+                null,
+                "\u6CE8\u518C"
+            )
+        ),
+        React.createElement(
+            "div",
+            { className: "download" },
+            "Go In \u5C0F\u7A0B\u5E8F"
+        )
+    );
+};
+
+exports.default = LoginMain;
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _Actions = __webpack_require__(9);
+
+var _Actions2 = _interopRequireDefault(_Actions);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Created by hongpao on 2018/4/16.
+ */
+
+var LoginMain = function LoginMain(props) {
+    var account = props.account,
+        password = props.password,
+        confirmPassword = props.confirmPassword,
+        LoginAction = props.LoginAction;
+
+    return React.createElement(
+        "div",
+        { className: "main-box" },
+        React.createElement(
+            "div",
+            { className: "box" },
+            React.createElement(
+                "div",
+                { className: "title" },
+                "\u6CE8\u518C\u620A\u620C"
+            ),
+            React.createElement(
+                "ul",
+                { className: "login-info" },
+                React.createElement(
+                    "li",
+                    null,
+                    React.createElement("input", { type: "number", name: "account", className: "login-input", value: account,
+                        onChange: LoginAction.setLoginInfo.bind(undefined, 1),
+                        placeholder: "\u624B\u673A\u53F7" })
+                ),
+                React.createElement(
+                    "li",
+                    null,
+                    React.createElement("input", { type: "password", name: "pwd", className: "login-input", value: password,
+                        onChange: LoginAction.setLoginInfo.bind(undefined, 2),
+                        placeholder: "\u5BC6\u7801" })
+                ),
+                React.createElement(
+                    "li",
+                    null,
+                    React.createElement("input", { type: "password", name: "pwd2", className: "login-input", value: confirmPassword,
+                        onChange: LoginAction.setLoginInfo.bind(undefined, 4),
+                        placeholder: "\u786E\u8BA4\u5BC6\u7801" })
+                )
+            ),
+            React.createElement(
+                "div",
+                { className: "btn", onClick: LoginAction.login.bind(undefined, account, password, 'r') },
+                "\u6CE8\u518C"
+            )
+        )
+    );
+};
+
+exports.default = LoginMain;
+
+/***/ }),
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1719,21 +1924,21 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(6);
+var _reactDom = __webpack_require__(8);
 
-var _Navigation = __webpack_require__(12);
+var _Navigation = __webpack_require__(13);
 
 var _Navigation2 = _interopRequireDefault(_Navigation);
 
-var _ManagementMain = __webpack_require__(21);
+var _ManagementMain = __webpack_require__(24);
 
 var _ManagementMain2 = _interopRequireDefault(_ManagementMain);
 
-var _Actions = __webpack_require__(22);
+var _Actions = __webpack_require__(25);
 
 var _Actions2 = _interopRequireDefault(_Actions);
 
-var _Stores = __webpack_require__(25);
+var _Stores = __webpack_require__(28);
 
 var _Stores2 = _interopRequireDefault(_Stores);
 
@@ -1814,7 +2019,7 @@ function init() {
 exports.default = { init: init };
 
 /***/ }),
-/* 21 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1944,7 +2149,7 @@ var ManagementMain = function ManagementMain(props) {
 exports.default = ManagementMain;
 
 /***/ }),
-/* 22 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1962,11 +2167,11 @@ var _AppConstants = __webpack_require__(2);
 
 var _AppConstants2 = _interopRequireDefault(_AppConstants);
 
-var _saveInfoApi = __webpack_require__(23);
+var _saveInfoApi = __webpack_require__(26);
 
 var _saveInfoApi2 = _interopRequireDefault(_saveInfoApi);
 
-var _uploadFileApi = __webpack_require__(24);
+var _uploadFileApi = __webpack_require__(27);
 
 var _uploadFileApi2 = _interopRequireDefault(_uploadFileApi);
 
@@ -2077,17 +2282,17 @@ var ManagementActions = {
 exports.default = ManagementActions;
 
 /***/ }),
-/* 23 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _ajax = __webpack_require__(8);
+var _ajax = __webpack_require__(5);
 
 var _ajax2 = _interopRequireDefault(_ajax);
 
-var _url = __webpack_require__(9);
+var _url = __webpack_require__(6);
 
 var _url2 = _interopRequireDefault(_url);
 
@@ -2117,17 +2322,17 @@ var savePageData = function savePageData(createInfo, options) {
 module.exports = savePageData;
 
 /***/ }),
-/* 24 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _ajax = __webpack_require__(8);
+var _ajax = __webpack_require__(5);
 
 var _ajax2 = _interopRequireDefault(_ajax);
 
-var _url = __webpack_require__(9);
+var _url = __webpack_require__(6);
 
 var _url2 = _interopRequireDefault(_url);
 
@@ -2153,7 +2358,7 @@ var uploadFile = function uploadFile(options) {
 module.exports = uploadFile;
 
 /***/ }),
-/* 25 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2171,11 +2376,11 @@ var _AppConstants = __webpack_require__(2);
 
 var _AppConstants2 = _interopRequireDefault(_AppConstants);
 
-var _objectAssign = __webpack_require__(5);
+var _objectAssign = __webpack_require__(7);
 
 var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-var _events = __webpack_require__(7);
+var _events = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2279,7 +2484,7 @@ _AppDispatcher2.default.register(function (action) {
 exports.default = ManagementStores;
 
 /***/ }),
-/* 26 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2295,33 +2500,33 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(6);
+var _reactDom = __webpack_require__(8);
 
-var _Navigation = __webpack_require__(12);
+var _Navigation = __webpack_require__(13);
 
 var _Navigation2 = _interopRequireDefault(_Navigation);
 
-var _Footer = __webpack_require__(27);
+var _Footer = __webpack_require__(30);
 
 var _Footer2 = _interopRequireDefault(_Footer);
 
-var _Actions = __webpack_require__(28);
+var _Actions = __webpack_require__(31);
 
 var _Actions2 = _interopRequireDefault(_Actions);
 
-var _Stores = __webpack_require__(30);
+var _Stores = __webpack_require__(33);
 
 var _Stores2 = _interopRequireDefault(_Stores);
 
-var _Swipe = __webpack_require__(31);
+var _Swipe = __webpack_require__(34);
 
 var _Swipe2 = _interopRequireDefault(_Swipe);
 
-var _LeftBox = __webpack_require__(39);
+var _LeftBox = __webpack_require__(42);
 
 var _LeftBox2 = _interopRequireDefault(_LeftBox);
 
-var _RightBox = __webpack_require__(40);
+var _RightBox = __webpack_require__(43);
 
 var _RightBox2 = _interopRequireDefault(_RightBox);
 
@@ -2394,7 +2599,7 @@ function init() {
 exports.default = { init: init };
 
 /***/ }),
-/* 27 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2419,7 +2624,7 @@ var Footer = function Footer() {
 exports.default = Footer;
 
 /***/ }),
-/* 28 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2437,7 +2642,7 @@ var _AppConstants = __webpack_require__(2);
 
 var _AppConstants2 = _interopRequireDefault(_AppConstants);
 
-var _getBannerApi = __webpack_require__(29);
+var _getBannerApi = __webpack_require__(32);
 
 var _getBannerApi2 = _interopRequireDefault(_getBannerApi);
 
@@ -2467,17 +2672,17 @@ var IndexAction = {
 exports.default = IndexAction;
 
 /***/ }),
-/* 29 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _ajax = __webpack_require__(8);
+var _ajax = __webpack_require__(5);
 
 var _ajax2 = _interopRequireDefault(_ajax);
 
-var _url = __webpack_require__(9);
+var _url = __webpack_require__(6);
 
 var _url2 = _interopRequireDefault(_url);
 
@@ -2499,7 +2704,7 @@ var getBannerImagePath = function getBannerImagePath(options) {
 module.exports = getBannerImagePath;
 
 /***/ }),
-/* 30 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2517,11 +2722,11 @@ var _AppConstants = __webpack_require__(2);
 
 var _AppConstants2 = _interopRequireDefault(_AppConstants);
 
-var _objectAssign = __webpack_require__(5);
+var _objectAssign = __webpack_require__(7);
 
 var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
-var _events = __webpack_require__(7);
+var _events = __webpack_require__(10);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2570,7 +2775,7 @@ _AppDispatcher2.default.register(function (action) {
 exports.default = IndexStore;
 
 /***/ }),
-/* 31 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2580,7 +2785,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _reactSwipe = __webpack_require__(32);
+var _reactSwipe = __webpack_require__(35);
 
 var _reactSwipe2 = _interopRequireDefault(_reactSwipe);
 
@@ -2614,7 +2819,7 @@ var Swipe = function Swipe(props) {
 exports.default = Swipe;
 
 /***/ }),
-/* 32 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2626,7 +2831,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _propTypes = __webpack_require__(33);
+var _propTypes = __webpack_require__(36);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -2634,11 +2839,11 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _swipeJsIso = __webpack_require__(38);
+var _swipeJsIso = __webpack_require__(41);
 
 var _swipeJsIso2 = _interopRequireDefault(_swipeJsIso);
 
-var _objectAssign = __webpack_require__(5);
+var _objectAssign = __webpack_require__(7);
 
 var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
@@ -2800,7 +3005,7 @@ module.exports = exports['default'];
 
 
 /***/ }),
-/* 33 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {/**
@@ -2825,17 +3030,17 @@ if (process.env.NODE_ENV !== 'production') {
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(34)(isValidElement, throwOnDirectAccess);
+  module.exports = __webpack_require__(37)(isValidElement, throwOnDirectAccess);
 } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(37)();
+  module.exports = __webpack_require__(40)();
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 34 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2848,13 +3053,13 @@ if (process.env.NODE_ENV !== 'production') {
 
 
 
-var emptyFunction = __webpack_require__(10);
+var emptyFunction = __webpack_require__(11);
 var invariant = __webpack_require__(4);
-var warning = __webpack_require__(13);
-var assign = __webpack_require__(35);
+var warning = __webpack_require__(14);
+var assign = __webpack_require__(38);
 
-var ReactPropTypesSecret = __webpack_require__(11);
-var checkPropTypes = __webpack_require__(36);
+var ReactPropTypesSecret = __webpack_require__(12);
+var checkPropTypes = __webpack_require__(39);
 
 module.exports = function(isValidElement, throwOnDirectAccess) {
   /* global Symbol */
@@ -3385,7 +3590,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 35 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3482,7 +3687,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 36 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3497,8 +3702,8 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 if (process.env.NODE_ENV !== 'production') {
   var invariant = __webpack_require__(4);
-  var warning = __webpack_require__(13);
-  var ReactPropTypesSecret = __webpack_require__(11);
+  var warning = __webpack_require__(14);
+  var ReactPropTypesSecret = __webpack_require__(12);
   var loggedTypeFailures = {};
 }
 
@@ -3549,7 +3754,7 @@ module.exports = checkPropTypes;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 37 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3562,9 +3767,9 @@ module.exports = checkPropTypes;
 
 
 
-var emptyFunction = __webpack_require__(10);
+var emptyFunction = __webpack_require__(11);
 var invariant = __webpack_require__(4);
-var ReactPropTypesSecret = __webpack_require__(11);
+var ReactPropTypesSecret = __webpack_require__(12);
 
 module.exports = function() {
   function shim(props, propName, componentName, location, propFullName, secret) {
@@ -3614,7 +3819,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 38 */
+/* 41 */
 /***/ (function(module, exports) {
 
 /*
@@ -4185,7 +4390,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 39 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4362,7 +4567,7 @@ var LeftBox = function LeftBox(props) {
 exports.default = LeftBox;
 
 /***/ }),
-/* 40 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4433,205 +4638,6 @@ var RightBox = function RightBox(props) {
 };
 
 exports.default = RightBox;
-
-/***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _ajax = __webpack_require__(8);
-
-var _ajax2 = _interopRequireDefault(_ajax);
-
-var _url = __webpack_require__(9);
-
-var _url2 = _interopRequireDefault(_url);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Created by hongpao on 2018/1/17.
- */
-
-var goLogin = function goLogin(account, password, options) {
-
-    options = options || {};
-    options.url = _url2.default.API_GO_LOGIN;
-    options.type = "post";
-    options.params = {
-        account: account,
-        password: password
-    };
-
-    return _ajax2.default.ajax(options);
-};
-
-module.exports = goLogin;
-
-/***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _Actions = __webpack_require__(16);
-
-var _Actions2 = _interopRequireDefault(_Actions);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Created by hongpao on 2018/4/16.
- */
-
-var LoginMain = function LoginMain(props) {
-    var account = props.account,
-        password = props.password,
-        LoginAction = props.LoginAction;
-
-    return React.createElement(
-        "div",
-        { className: "main-box" },
-        React.createElement(
-            "div",
-            { className: "box" },
-            React.createElement(
-                "div",
-                { className: "title" },
-                "\u620A\u620C12\u5E74"
-            ),
-            React.createElement(
-                "ul",
-                { className: "login-info" },
-                React.createElement(
-                    "li",
-                    null,
-                    React.createElement("input", { type: "text", name: "account", className: "login-input", value: account,
-                        onChange: LoginAction.setLoginInfo.bind(undefined, 1),
-                        placeholder: "\u8D26\u53F7\u3001\u624B\u673A\u53F7\u6216\u90AE\u7BB1" })
-                ),
-                React.createElement(
-                    "li",
-                    null,
-                    React.createElement("input", { type: "password", name: "pwd", className: "login-input", value: password,
-                        onChange: LoginAction.setLoginInfo.bind(undefined, 2),
-                        placeholder: "\u5BC6\u7801" })
-                ),
-                React.createElement(
-                    "li",
-                    null,
-                    React.createElement(
-                        "p",
-                        { className: "forgot" },
-                        "\u5FD8\u8BB0\u5BC6\u7801\uFF1F"
-                    )
-                )
-            ),
-            React.createElement(
-                "div",
-                { className: "btn", onClick: LoginAction.login.bind(undefined, account, password) },
-                "\u767B\u5F55"
-            )
-        ),
-        React.createElement(
-            "div",
-            { className: "newSign", onClick: LoginAction.toRegistered.bind(undefined, "r") },
-            "\u6CA1\u6709\u8D26\u53F7\uFF1F",
-            React.createElement(
-                "i",
-                null,
-                "\u6CE8\u518C"
-            )
-        ),
-        React.createElement(
-            "div",
-            { className: "download" },
-            "Go In \u5C0F\u7A0B\u5E8F"
-        )
-    );
-};
-
-exports.default = LoginMain;
-
-/***/ }),
-/* 43 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _Actions = __webpack_require__(16);
-
-var _Actions2 = _interopRequireDefault(_Actions);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Created by hongpao on 2018/4/16.
- */
-
-var LoginMain = function LoginMain(props) {
-    var account = props.account,
-        password = props.password,
-        LoginAction = props.LoginAction;
-
-    return React.createElement(
-        "div",
-        { className: "main-box" },
-        React.createElement(
-            "div",
-            { className: "box" },
-            React.createElement(
-                "div",
-                { className: "title" },
-                "\u6CE8\u518C\u620A\u620C"
-            ),
-            React.createElement(
-                "ul",
-                { className: "login-info" },
-                React.createElement(
-                    "li",
-                    null,
-                    React.createElement("input", { type: "text", name: "account", className: "login-input", value: account,
-                        onChange: LoginAction.setLoginInfo.bind(undefined, 1),
-                        placeholder: "\u8D26\u53F7\u3001\u624B\u673A\u53F7\u6216\u90AE\u7BB1" })
-                ),
-                React.createElement(
-                    "li",
-                    null,
-                    React.createElement("input", { type: "password", name: "pwd", className: "login-input", value: password,
-                        onChange: LoginAction.setLoginInfo.bind(undefined, 2),
-                        placeholder: "\u5BC6\u7801" })
-                ),
-                React.createElement(
-                    "li",
-                    null,
-                    React.createElement("input", { type: "password", name: "pwd", className: "login-input", value: password,
-                        onChange: LoginAction.setLoginInfo.bind(undefined, 2),
-                        placeholder: "\u786E\u8BA4\u5BC6\u7801" })
-                )
-            ),
-            React.createElement(
-                "div",
-                { className: "btn", onClick: LoginAction.registered.bind(undefined, account, password) },
-                "\u6CE8\u518C"
-            )
-        )
-    );
-};
-
-exports.default = LoginMain;
 
 /***/ })
 /******/ ]);

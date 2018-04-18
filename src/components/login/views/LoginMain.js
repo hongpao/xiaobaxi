@@ -25,7 +25,7 @@ const LoginMain = (props) => {
                         <p className="forgot">忘记密码？</p>
                     </li>
                 </ul>
-                <div className="btn" onClick={LoginAction.login.bind(this, account, password)}>登录</div>
+                <div className="btn" onClick={LoginAction.login.bind(this, account, password, 'l')}>登录</div>
             </div>
             <div className="newSign" onClick={LoginAction.toRegistered.bind(this, "r")}>没有账号？<i>注册</i></div>
             <div className="download">Go In 小程序</div>
